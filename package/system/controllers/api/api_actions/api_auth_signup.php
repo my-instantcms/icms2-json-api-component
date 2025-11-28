@@ -169,6 +169,8 @@ class actionAuthApiAuthSignup extends cmsAction {
             }
         }
 
+        $user['nickname'] = strstr($user['email'], '@', true); // так как nickname это is_system, в списке ее нет, поэтому наверно генерируется из email, перенес выше потому что ругается в строке 181 что нет nickname
+
         //
         // проверяем допустимость e-mail и имени
         //
