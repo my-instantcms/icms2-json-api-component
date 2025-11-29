@@ -205,6 +205,10 @@ class actionContentApiContentGetItem extends cmsAction {
 
             }
 
+            if (!empty($this->item['user_avatar'])){
+				$this->item['user_avatar'] = api_image_src($this->item['user_avatar']);
+			}
+
             if (in_array($field['type'], array('images','image'))){
                 $this->item[$name] = api_image_src($this->item[$name]);
             } else
