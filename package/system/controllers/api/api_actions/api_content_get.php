@@ -303,6 +303,10 @@ class actionContentApiContentGet extends cmsAction {
 
                 $is_private = $item['is_private'] == 1 && !$item['user']['is_friend'];
 
+				if (!empty($item['user_avatar'])){
+					$items[$key]['user_avatar'] = api_image_src($item['user_avatar']);
+				}
+
                 $item['ctype'] = $this->ctype;
 
                 foreach($fields as $name => $field){
