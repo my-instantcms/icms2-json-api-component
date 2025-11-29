@@ -58,8 +58,8 @@ class actionContentApiContentGetDatasets extends cmsAction {
 
         $datasets = $this->model->getContentDatasets($this->ctype['id'], !$this->request->get('show_all'));
 
-        $this->result['count'] = count($datasets);
-        $this->result['items'] = $datasets;
+        $this->result['count'] = $datasets ? count($datasets) : 0;
+        $this->result['items'] = $datasets ? $datasets : array();
 
     }
 
