@@ -214,6 +214,17 @@ class actionContentApiContentGetItem extends cmsAction {
 
         }
 
+        if (!empty($this->item['user_avatar'])){
+			$this->item['user_avatar'] = api_image_src($this->item['user_avatar']);
+		}
+		
+		// счетчик просмотров увеличивается, если включен в настройках,
+        // не запрещён в записи (флаг disable_increment_hits, который может быть определён ранее в хуках)
+        // и если смотрит не автор
+        if (!empty($this->ctype['options']['hits_on']) && empty($this->item['disable_increment_hits']) && $this->cms_user->id != $this->item['user_id']){
+            $this->model->incrementHitsCounter($this->ctype['name'], $this->item['id']);
+        }
+
         // убираем ненужное
         foreach($fields as $name => $field){
             unset($fields[$name]['handler']);
